@@ -29,12 +29,12 @@ jobs:
   - stage: test
     script: "./scripts/docker_test.sh"
     env: TEST_PLATFORM=playmode IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
-  - stage: build
-    env: BUILD_TARGET=StandaloneLinux64 IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
-    script: "./scripts/docker_build.sh"
-  - stage: build
-    env: BUILD_TARGET=StandaloneOSX IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION-mac
-    script: "./scripts/docker_build.sh"
-  - stage: build
-    env: BUILD_TARGET=StandaloneWindows64 IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION-windows
-    script: "./scripts/docker_build.sh"
+#  - stage: build
+#    env: BUILD_TARGET=StandaloneLinux64 IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
+#    script: "./scripts/docker_build.sh"
+#  - stage: build
+#    env: BUILD_TARGET=StandaloneOSX IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION-mac
+#    script: "./scripts/docker_build.sh"
+#  - stage: build
+#    env: BUILD_TARGET=StandaloneWindows64 IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION-windows
+#    script: "./scripts/docker_build.sh"

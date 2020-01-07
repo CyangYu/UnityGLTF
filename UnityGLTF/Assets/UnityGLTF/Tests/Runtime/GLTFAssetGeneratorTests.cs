@@ -50,6 +50,10 @@ public class GLTFAssetGeneratorTests
 				throw new Exception("Could not find directory at path: " + path);
 			}
 		}
+		if (!File.Exists(fullPath))
+		{
+			throw new Exception("Could not find file at path: " + fullPath);
+		}
 
 		List<Manifest> manifests = JsonConvert.DeserializeObject<List<Manifest>>(File.ReadAllText(fullPath));
 		foreach (Manifest manifest in manifests)
