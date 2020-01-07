@@ -21,7 +21,7 @@ install:
 # Mark all the scripts as executable
 - chmod -R +rwx ./scripts
 # Mark all the 'www' files as accessible to all so the Unity tests can leverage them
-- chmod -R +rwx ./UnityGLTF/www
+# - chmod -R +rwx ./UnityGLTF/www
 jobs:
   include:
   - stage: test
