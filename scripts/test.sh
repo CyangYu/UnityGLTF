@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -en "Testing for $TEST_PLATFORM" && echo "travis_fold:start:test.1"
+echo -en "Testing for $TEST_PLATFORM\\r" && echo "travis_fold:start:test.1"
 
 ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' /opt/Unity/Editor/Unity} \
   -projectPath $PROJECT_PATH \
@@ -25,7 +25,7 @@ fi
 echo -en "travis_fold:end:test.1\\r"
 
 # Log the complete test results
-echo "$(pwd)/$TEST_PLATFORM-results.xml" && echo -en "travis_fold:start:test.2\\r"
+echo -en "travis_fold:start:test.2\\r" && echo "$(pwd)/$TEST_PLATFORM-results.xml"
 cat $(pwd)/$TEST_PLATFORM-results.xml
 echo -en "travis_fold:end:test.2\\r"
 

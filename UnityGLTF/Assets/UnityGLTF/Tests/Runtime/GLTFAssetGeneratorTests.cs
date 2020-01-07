@@ -14,7 +14,7 @@ public class GLTFAssetGeneratorTests
 {
 	private const int IMAGE_SIZE = 400;
 	private static readonly string GLTF_ASSETS_PATH = Application.dataPath + "/../www/glTF-Asset-Generator/Output/Positive/";
-	private static readonly string GLTF_MANIFEST_PATH = GLTF_ASSETS_PATH + "manifest.json";
+	private static readonly string GLTF_MANIFEST_PATH = GLTF_ASSETS_PATH + "Manifest.json";
 	private static readonly string GLTF_SCENARIO_OUTPUT_PATH = Application.dataPath + "/../ScenarioTests/Output/";
 	private static readonly string GLTF_SCENARIO_TESTS_TO_RUN = Application.dataPath + "/../ScenarioTests/TestsToRun.txt";
 
