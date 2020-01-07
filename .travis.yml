@@ -26,9 +26,9 @@ jobs:
     script: "./scripts/docker_test.sh"
     env: TEST_PLATFORM=editmode IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
 # TODO: Re-enable playmode tests once they are passing on server builds
-#  - stage: test
-#    script: "./scripts/docker_test.sh"
-#    env: TEST_PLATFORM=playmode IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
+  - stage: test
+    script: "./scripts/docker_test.sh"
+    env: TEST_PLATFORM=playmode IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
   - stage: build
     env: BUILD_TARGET=StandaloneLinux64 IMAGE_NAME=gableroux/unity3d:$UNITY_VERSION
     script: "./scripts/docker_build.sh"

@@ -28,7 +28,30 @@ public class GLTFAssetGeneratorTests
 		gltfComponent = scenePrefab.GetComponentInChildren<GLTFComponent>() ;
 
 		// Parse manifest into a lookup dictionary
-		List<Manifest> manifests = JsonConvert.DeserializeObject<List<Manifest>>(File.ReadAllText(GLTF_MANIFEST_PATH));
+		var fullPath = Path.GetFullPath(GLTF_MANIFEST_PATH);
+		var pathParts = fullPath.Split('/', '\\');
+		if (fullPath.StartsWith("E:"))
+		{
+			pathParts[0] = "E:\\";
+		}
+		else
+		{
+			pathParts[0] = "/" + pathParts[0];
+		}
+		for (int i = 1; i < pathParts.Length; i++)
+		{
+			var path = string.Empty;
+			for (int j = 0; j < i; j++)
+			{
+				path = Path.Combine(path, pathParts[j]);
+			}
+			if (!Directory.Exists(path))
+			{
+				throw new Exception("Could not find directory at path: " + path);
+			}
+		}
+
+		List<Manifest> manifests = JsonConvert.DeserializeObject<List<Manifest>>(File.ReadAllText(fullPath));
 		foreach (Manifest manifest in manifests)
 		{
 			foreach (Manifest.Model model in manifest.Models)
