@@ -19,7 +19,9 @@ install:
 - nuget restore ./GLTFSerialization/GLTFSerialization.sln
 - msbuild ./GLTFSerialization/GLTFSerialization.sln /t:GLTFSerialization /p:TargetFramework=net35
 # Mark all the scripts as executable
-- chmod -R +rwx ./scripts/*
+- chmod -R +rwx ./scripts
+# Mark all the 'www' files as accessible to all so the Unity tests can leverage them
+- chmod -R +rwx ./UnityGLTF/www
 jobs:
   include:
   - stage: test

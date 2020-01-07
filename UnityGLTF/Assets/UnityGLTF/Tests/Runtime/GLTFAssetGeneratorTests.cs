@@ -38,6 +38,7 @@ public class GLTFAssetGeneratorTests
 		{
 			pathParts[0] = "/" + pathParts[0];
 		}
+		string[] files = default;
 		for (int i = 1; i < pathParts.Length; i++)
 		{
 			var path = string.Empty;
@@ -45,17 +46,46 @@ public class GLTFAssetGeneratorTests
 			{
 				path = Path.Combine(path, pathParts[j]);
 			}
+			Debug.Log("Checking for path: " + path);
 			if (!Directory.Exists(path))
 			{
 				throw new Exception("Could not find directory at path: " + path);
 			}
+			files = Directory.GetFiles(path);
 		}
+		string filesAsString = string.Empty;
+		for (int i = 0; i < files.Length; i++)
+		{
+			Debug.Log("File found: " + files[i]);
+			filesAsString += files[i] + "\\r\\n";
+		}
+		Debug.Log("Checking for file: " + fullPath);
 		if (!File.Exists(fullPath))
 		{
-			throw new Exception("Could not find file at path: " + fullPath);
+			throw new Exception("Could not find file at path: " + fullPath + ". Files found: " + filesAsString);
 		}
 
-		List<Manifest> manifests = JsonConvert.DeserializeObject<List<Manifest>>(File.ReadAllText(fullPath));
+		string manifestText = string.Empty;
+		try
+		{
+			manifestText = File.ReadAllText(fullPath);
+		}
+		catch (Exception ex)
+		{
+			Debug.Log("Failure trying ReadAllText");
+			Debug.LogException(ex);
+			var attributes = File.GetAttributes(fullPath);
+			Debug.Log("File attributes:" + attributes.ToString());
+			var stream = File.OpenRead(fullPath);
+			Debug.Log("stream opened");
+			using (var textReader = new StreamReader(stream))
+			{
+				Debug.Log("textReader created");
+				manifestText = textReader.ReadToEnd();
+			}
+			stream.Dispose();
+		}
+		List<Manifest> manifests = JsonConvert.DeserializeObject<List<Manifest>>(manifestText);
 		foreach (Manifest manifest in manifests)
 		{
 			foreach (Manifest.Model model in manifest.Models)
